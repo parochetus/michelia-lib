@@ -15,6 +15,10 @@ pub struct RecordRequest {
     pub timestamp: i64,
     #[prost(string, tag = "3")]
     pub domain: ::prost::alloc::string::String,
+    #[prost(string, tag = "4")]
+    pub uid: ::prost::alloc::string::String,
+    #[prost(string, tag = "5")]
+    pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

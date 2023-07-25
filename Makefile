@@ -1,7 +1,7 @@
 .PHONY: rust
 
 rust:
-	cd components/rust/michelia-lib
+	@cd components/rust/michelia-lib
 	cargo build
 
 go:
