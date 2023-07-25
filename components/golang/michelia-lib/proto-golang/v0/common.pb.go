@@ -67,20 +67,612 @@ func (m *TableLocation) GetTable() string {
 	return ""
 }
 
+type SliceConfiguration struct {
+	Slot                 int32    `protobuf:"varint,1,opt,name=slot,proto3" json:"slot,omitempty"`
+	Segment              int32    `protobuf:"varint,2,opt,name=segment,proto3" json:"segment,omitempty"`
+	Slice                int32    `protobuf:"varint,3,opt,name=slice,proto3" json:"slice,omitempty"`
+	Cache                bool     `protobuf:"varint,4,opt,name=cache,proto3" json:"cache,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *SliceConfiguration) Reset()         { *m = SliceConfiguration{} }
+func (m *SliceConfiguration) String() string { return proto.CompactTextString(m) }
+func (*SliceConfiguration) ProtoMessage()    {}
+func (*SliceConfiguration) Descriptor() ([]byte, []int) {
+	return fileDescriptor_555bd8c177793206, []int{1}
+}
+
+func (m *SliceConfiguration) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_SliceConfiguration.Unmarshal(m, b)
+}
+func (m *SliceConfiguration) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_SliceConfiguration.Marshal(b, m, deterministic)
+}
+func (m *SliceConfiguration) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SliceConfiguration.Merge(m, src)
+}
+func (m *SliceConfiguration) XXX_Size() int {
+	return xxx_messageInfo_SliceConfiguration.Size(m)
+}
+func (m *SliceConfiguration) XXX_DiscardUnknown() {
+	xxx_messageInfo_SliceConfiguration.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_SliceConfiguration proto.InternalMessageInfo
+
+func (m *SliceConfiguration) GetSlot() int32 {
+	if m != nil {
+		return m.Slot
+	}
+	return 0
+}
+
+func (m *SliceConfiguration) GetSegment() int32 {
+	if m != nil {
+		return m.Segment
+	}
+	return 0
+}
+
+func (m *SliceConfiguration) GetSlice() int32 {
+	if m != nil {
+		return m.Slice
+	}
+	return 0
+}
+
+func (m *SliceConfiguration) GetCache() bool {
+	if m != nil {
+		return m.Cache
+	}
+	return false
+}
+
+type TendencyConfiguration struct {
+	// tendency mode
+	// mode 0: strict mode
+	// mode 1: threshold mode
+	Mode int32 `protobuf:"varint,1,opt,name=mode,proto3" json:"mode,omitempty"`
+	// toward 0: increase
+	// toward 1: keep
+	// toward 2: decrease
+	Toward int32 `protobuf:"varint,2,opt,name=toward,proto3" json:"toward,omitempty"`
+	// treat delta/1000 as the effective threshold
+	Delta                int32    `protobuf:"varint,3,opt,name=delta,proto3" json:"delta,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *TendencyConfiguration) Reset()         { *m = TendencyConfiguration{} }
+func (m *TendencyConfiguration) String() string { return proto.CompactTextString(m) }
+func (*TendencyConfiguration) ProtoMessage()    {}
+func (*TendencyConfiguration) Descriptor() ([]byte, []int) {
+	return fileDescriptor_555bd8c177793206, []int{2}
+}
+
+func (m *TendencyConfiguration) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_TendencyConfiguration.Unmarshal(m, b)
+}
+func (m *TendencyConfiguration) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_TendencyConfiguration.Marshal(b, m, deterministic)
+}
+func (m *TendencyConfiguration) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TendencyConfiguration.Merge(m, src)
+}
+func (m *TendencyConfiguration) XXX_Size() int {
+	return xxx_messageInfo_TendencyConfiguration.Size(m)
+}
+func (m *TendencyConfiguration) XXX_DiscardUnknown() {
+	xxx_messageInfo_TendencyConfiguration.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_TendencyConfiguration proto.InternalMessageInfo
+
+func (m *TendencyConfiguration) GetMode() int32 {
+	if m != nil {
+		return m.Mode
+	}
+	return 0
+}
+
+func (m *TendencyConfiguration) GetToward() int32 {
+	if m != nil {
+		return m.Toward
+	}
+	return 0
+}
+
+func (m *TendencyConfiguration) GetDelta() int32 {
+	if m != nil {
+		return m.Delta
+	}
+	return 0
+}
+
+type SlotWindowConfiguration struct {
+	Hole                 *HoleConfiguration `protobuf:"bytes,1,opt,name=hole,proto3" json:"hole,omitempty"`
+	Size                 int32              `protobuf:"varint,2,opt,name=size,proto3" json:"size,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}           `json:"-"`
+	XXX_unrecognized     []byte             `json:"-"`
+	XXX_sizecache        int32              `json:"-"`
+}
+
+func (m *SlotWindowConfiguration) Reset()         { *m = SlotWindowConfiguration{} }
+func (m *SlotWindowConfiguration) String() string { return proto.CompactTextString(m) }
+func (*SlotWindowConfiguration) ProtoMessage()    {}
+func (*SlotWindowConfiguration) Descriptor() ([]byte, []int) {
+	return fileDescriptor_555bd8c177793206, []int{3}
+}
+
+func (m *SlotWindowConfiguration) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_SlotWindowConfiguration.Unmarshal(m, b)
+}
+func (m *SlotWindowConfiguration) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_SlotWindowConfiguration.Marshal(b, m, deterministic)
+}
+func (m *SlotWindowConfiguration) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SlotWindowConfiguration.Merge(m, src)
+}
+func (m *SlotWindowConfiguration) XXX_Size() int {
+	return xxx_messageInfo_SlotWindowConfiguration.Size(m)
+}
+func (m *SlotWindowConfiguration) XXX_DiscardUnknown() {
+	xxx_messageInfo_SlotWindowConfiguration.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_SlotWindowConfiguration proto.InternalMessageInfo
+
+func (m *SlotWindowConfiguration) GetHole() *HoleConfiguration {
+	if m != nil {
+		return m.Hole
+	}
+	return nil
+}
+
+func (m *SlotWindowConfiguration) GetSize() int32 {
+	if m != nil {
+		return m.Size
+	}
+	return 0
+}
+
+type HoleConfiguration struct {
+	// hole mode
+	// mode 0: no hole
+	// mode 1: single hole available
+	// mode 2: multi-hole available
+	Mode int32 `protobuf:"varint,1,opt,name=mode,proto3" json:"mode,omitempty"`
+	// total hole count
+	Count int32 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
+	// max continuous hole number
+	Offset               int32    `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *HoleConfiguration) Reset()         { *m = HoleConfiguration{} }
+func (m *HoleConfiguration) String() string { return proto.CompactTextString(m) }
+func (*HoleConfiguration) ProtoMessage()    {}
+func (*HoleConfiguration) Descriptor() ([]byte, []int) {
+	return fileDescriptor_555bd8c177793206, []int{4}
+}
+
+func (m *HoleConfiguration) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_HoleConfiguration.Unmarshal(m, b)
+}
+func (m *HoleConfiguration) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_HoleConfiguration.Marshal(b, m, deterministic)
+}
+func (m *HoleConfiguration) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_HoleConfiguration.Merge(m, src)
+}
+func (m *HoleConfiguration) XXX_Size() int {
+	return xxx_messageInfo_HoleConfiguration.Size(m)
+}
+func (m *HoleConfiguration) XXX_DiscardUnknown() {
+	xxx_messageInfo_HoleConfiguration.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_HoleConfiguration proto.InternalMessageInfo
+
+func (m *HoleConfiguration) GetMode() int32 {
+	if m != nil {
+		return m.Mode
+	}
+	return 0
+}
+
+func (m *HoleConfiguration) GetCount() int32 {
+	if m != nil {
+		return m.Count
+	}
+	return 0
+}
+
+func (m *HoleConfiguration) GetOffset() int32 {
+	if m != nil {
+		return m.Offset
+	}
+	return 0
+}
+
+type WindowOperationConfiguration struct {
+	// window operation mode
+	// mode 0: sample
+	// mode 1: average
+	// mode 2: moving average
+	Mode int32 `protobuf:"varint,1,opt,name=mode,proto3" json:"mode,omitempty"`
+	// total hole count
+	Size int32 `protobuf:"varint,2,opt,name=size,proto3" json:"size,omitempty"`
+	// max continuous hole number
+	Offset               int32    `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *WindowOperationConfiguration) Reset()         { *m = WindowOperationConfiguration{} }
+func (m *WindowOperationConfiguration) String() string { return proto.CompactTextString(m) }
+func (*WindowOperationConfiguration) ProtoMessage()    {}
+func (*WindowOperationConfiguration) Descriptor() ([]byte, []int) {
+	return fileDescriptor_555bd8c177793206, []int{5}
+}
+
+func (m *WindowOperationConfiguration) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_WindowOperationConfiguration.Unmarshal(m, b)
+}
+func (m *WindowOperationConfiguration) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_WindowOperationConfiguration.Marshal(b, m, deterministic)
+}
+func (m *WindowOperationConfiguration) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_WindowOperationConfiguration.Merge(m, src)
+}
+func (m *WindowOperationConfiguration) XXX_Size() int {
+	return xxx_messageInfo_WindowOperationConfiguration.Size(m)
+}
+func (m *WindowOperationConfiguration) XXX_DiscardUnknown() {
+	xxx_messageInfo_WindowOperationConfiguration.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_WindowOperationConfiguration proto.InternalMessageInfo
+
+func (m *WindowOperationConfiguration) GetMode() int32 {
+	if m != nil {
+		return m.Mode
+	}
+	return 0
+}
+
+func (m *WindowOperationConfiguration) GetSize() int32 {
+	if m != nil {
+		return m.Size
+	}
+	return 0
+}
+
+func (m *WindowOperationConfiguration) GetOffset() int32 {
+	if m != nil {
+		return m.Offset
+	}
+	return 0
+}
+
+type TimestampConfiguration struct {
+	Ts                   int64    `protobuf:"varint,1,opt,name=ts,proto3" json:"ts,omitempty"`
+	Dir                  bool     `protobuf:"varint,2,opt,name=dir,proto3" json:"dir,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *TimestampConfiguration) Reset()         { *m = TimestampConfiguration{} }
+func (m *TimestampConfiguration) String() string { return proto.CompactTextString(m) }
+func (*TimestampConfiguration) ProtoMessage()    {}
+func (*TimestampConfiguration) Descriptor() ([]byte, []int) {
+	return fileDescriptor_555bd8c177793206, []int{6}
+}
+
+func (m *TimestampConfiguration) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_TimestampConfiguration.Unmarshal(m, b)
+}
+func (m *TimestampConfiguration) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_TimestampConfiguration.Marshal(b, m, deterministic)
+}
+func (m *TimestampConfiguration) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TimestampConfiguration.Merge(m, src)
+}
+func (m *TimestampConfiguration) XXX_Size() int {
+	return xxx_messageInfo_TimestampConfiguration.Size(m)
+}
+func (m *TimestampConfiguration) XXX_DiscardUnknown() {
+	xxx_messageInfo_TimestampConfiguration.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_TimestampConfiguration proto.InternalMessageInfo
+
+func (m *TimestampConfiguration) GetTs() int64 {
+	if m != nil {
+		return m.Ts
+	}
+	return 0
+}
+
+func (m *TimestampConfiguration) GetDir() bool {
+	if m != nil {
+		return m.Dir
+	}
+	return false
+}
+
+type TagReduceConfiguration struct {
+	// reduce mode
+	// mode 0: must contain all
+	// mode 1: must not contain all
+	// mode 2: contain any
+	Mode                 int32    `protobuf:"varint,1,opt,name=mode,proto3" json:"mode,omitempty"`
+	Head                 []string `protobuf:"bytes,2,rep,name=head,proto3" json:"head,omitempty"`
+	Detail               []string `protobuf:"bytes,3,rep,name=detail,proto3" json:"detail,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *TagReduceConfiguration) Reset()         { *m = TagReduceConfiguration{} }
+func (m *TagReduceConfiguration) String() string { return proto.CompactTextString(m) }
+func (*TagReduceConfiguration) ProtoMessage()    {}
+func (*TagReduceConfiguration) Descriptor() ([]byte, []int) {
+	return fileDescriptor_555bd8c177793206, []int{7}
+}
+
+func (m *TagReduceConfiguration) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_TagReduceConfiguration.Unmarshal(m, b)
+}
+func (m *TagReduceConfiguration) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_TagReduceConfiguration.Marshal(b, m, deterministic)
+}
+func (m *TagReduceConfiguration) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TagReduceConfiguration.Merge(m, src)
+}
+func (m *TagReduceConfiguration) XXX_Size() int {
+	return xxx_messageInfo_TagReduceConfiguration.Size(m)
+}
+func (m *TagReduceConfiguration) XXX_DiscardUnknown() {
+	xxx_messageInfo_TagReduceConfiguration.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_TagReduceConfiguration proto.InternalMessageInfo
+
+func (m *TagReduceConfiguration) GetMode() int32 {
+	if m != nil {
+		return m.Mode
+	}
+	return 0
+}
+
+func (m *TagReduceConfiguration) GetHead() []string {
+	if m != nil {
+		return m.Head
+	}
+	return nil
+}
+
+func (m *TagReduceConfiguration) GetDetail() []string {
+	if m != nil {
+		return m.Detail
+	}
+	return nil
+}
+
+type SelectorConfiguration struct {
+	// selector mode
+	// mode 0: *
+	// mode 1: uid
+	// mode 2: un
+	// mode 3: domain
+	// mode 4: tag
+	Mode                 int32                   `protobuf:"varint,1,opt,name=mode,proto3" json:"mode,omitempty"`
+	Uid                  string                  `protobuf:"bytes,2,opt,name=uid,proto3" json:"uid,omitempty"`
+	Un                   string                  `protobuf:"bytes,3,opt,name=un,proto3" json:"un,omitempty"`
+	Domain               string                  `protobuf:"bytes,4,opt,name=domain,proto3" json:"domain,omitempty"`
+	Tag                  *TagReduceConfiguration `protobuf:"bytes,5,opt,name=tag,proto3" json:"tag,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                `json:"-"`
+	XXX_unrecognized     []byte                  `json:"-"`
+	XXX_sizecache        int32                   `json:"-"`
+}
+
+func (m *SelectorConfiguration) Reset()         { *m = SelectorConfiguration{} }
+func (m *SelectorConfiguration) String() string { return proto.CompactTextString(m) }
+func (*SelectorConfiguration) ProtoMessage()    {}
+func (*SelectorConfiguration) Descriptor() ([]byte, []int) {
+	return fileDescriptor_555bd8c177793206, []int{8}
+}
+
+func (m *SelectorConfiguration) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_SelectorConfiguration.Unmarshal(m, b)
+}
+func (m *SelectorConfiguration) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_SelectorConfiguration.Marshal(b, m, deterministic)
+}
+func (m *SelectorConfiguration) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SelectorConfiguration.Merge(m, src)
+}
+func (m *SelectorConfiguration) XXX_Size() int {
+	return xxx_messageInfo_SelectorConfiguration.Size(m)
+}
+func (m *SelectorConfiguration) XXX_DiscardUnknown() {
+	xxx_messageInfo_SelectorConfiguration.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_SelectorConfiguration proto.InternalMessageInfo
+
+func (m *SelectorConfiguration) GetMode() int32 {
+	if m != nil {
+		return m.Mode
+	}
+	return 0
+}
+
+func (m *SelectorConfiguration) GetUid() string {
+	if m != nil {
+		return m.Uid
+	}
+	return ""
+}
+
+func (m *SelectorConfiguration) GetUn() string {
+	if m != nil {
+		return m.Un
+	}
+	return ""
+}
+
+func (m *SelectorConfiguration) GetDomain() string {
+	if m != nil {
+		return m.Domain
+	}
+	return ""
+}
+
+func (m *SelectorConfiguration) GetTag() *TagReduceConfiguration {
+	if m != nil {
+		return m.Tag
+	}
+	return nil
+}
+
+type PlainSelectFilterReduceConfiguration struct {
+	Selector             *SelectorConfiguration   `protobuf:"bytes,1,opt,name=selector,proto3" json:"selector,omitempty"`
+	Slice                *SliceConfiguration      `protobuf:"bytes,2,opt,name=slice,proto3" json:"slice,omitempty"`
+	Timestamp            *TimestampConfiguration  `protobuf:"bytes,3,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	Slot                 *SlotWindowConfiguration `protobuf:"bytes,4,opt,name=slot,proto3" json:"slot,omitempty"`
+	Tendency             *TendencyConfiguration   `protobuf:"bytes,5,opt,name=tendency,proto3" json:"tendency,omitempty"`
+	Reduce               *TagReduceConfiguration  `protobuf:"bytes,6,opt,name=reduce,proto3" json:"reduce,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                 `json:"-"`
+	XXX_unrecognized     []byte                   `json:"-"`
+	XXX_sizecache        int32                    `json:"-"`
+}
+
+func (m *PlainSelectFilterReduceConfiguration) Reset()         { *m = PlainSelectFilterReduceConfiguration{} }
+func (m *PlainSelectFilterReduceConfiguration) String() string { return proto.CompactTextString(m) }
+func (*PlainSelectFilterReduceConfiguration) ProtoMessage()    {}
+func (*PlainSelectFilterReduceConfiguration) Descriptor() ([]byte, []int) {
+	return fileDescriptor_555bd8c177793206, []int{9}
+}
+
+func (m *PlainSelectFilterReduceConfiguration) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_PlainSelectFilterReduceConfiguration.Unmarshal(m, b)
+}
+func (m *PlainSelectFilterReduceConfiguration) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_PlainSelectFilterReduceConfiguration.Marshal(b, m, deterministic)
+}
+func (m *PlainSelectFilterReduceConfiguration) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PlainSelectFilterReduceConfiguration.Merge(m, src)
+}
+func (m *PlainSelectFilterReduceConfiguration) XXX_Size() int {
+	return xxx_messageInfo_PlainSelectFilterReduceConfiguration.Size(m)
+}
+func (m *PlainSelectFilterReduceConfiguration) XXX_DiscardUnknown() {
+	xxx_messageInfo_PlainSelectFilterReduceConfiguration.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_PlainSelectFilterReduceConfiguration proto.InternalMessageInfo
+
+func (m *PlainSelectFilterReduceConfiguration) GetSelector() *SelectorConfiguration {
+	if m != nil {
+		return m.Selector
+	}
+	return nil
+}
+
+func (m *PlainSelectFilterReduceConfiguration) GetSlice() *SliceConfiguration {
+	if m != nil {
+		return m.Slice
+	}
+	return nil
+}
+
+func (m *PlainSelectFilterReduceConfiguration) GetTimestamp() *TimestampConfiguration {
+	if m != nil {
+		return m.Timestamp
+	}
+	return nil
+}
+
+func (m *PlainSelectFilterReduceConfiguration) GetSlot() *SlotWindowConfiguration {
+	if m != nil {
+		return m.Slot
+	}
+	return nil
+}
+
+func (m *PlainSelectFilterReduceConfiguration) GetTendency() *TendencyConfiguration {
+	if m != nil {
+		return m.Tendency
+	}
+	return nil
+}
+
+func (m *PlainSelectFilterReduceConfiguration) GetReduce() *TagReduceConfiguration {
+	if m != nil {
+		return m.Reduce
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*TableLocation)(nil), "mechelia.v0.TableLocation")
+	proto.RegisterType((*SliceConfiguration)(nil), "mechelia.v0.SliceConfiguration")
+	proto.RegisterType((*TendencyConfiguration)(nil), "mechelia.v0.TendencyConfiguration")
+	proto.RegisterType((*SlotWindowConfiguration)(nil), "mechelia.v0.SlotWindowConfiguration")
+	proto.RegisterType((*HoleConfiguration)(nil), "mechelia.v0.HoleConfiguration")
+	proto.RegisterType((*WindowOperationConfiguration)(nil), "mechelia.v0.WindowOperationConfiguration")
+	proto.RegisterType((*TimestampConfiguration)(nil), "mechelia.v0.TimestampConfiguration")
+	proto.RegisterType((*TagReduceConfiguration)(nil), "mechelia.v0.TagReduceConfiguration")
+	proto.RegisterType((*SelectorConfiguration)(nil), "mechelia.v0.SelectorConfiguration")
+	proto.RegisterType((*PlainSelectFilterReduceConfiguration)(nil), "mechelia.v0.PlainSelectFilterReduceConfiguration")
 }
 
 func init() { proto.RegisterFile("common.proto", fileDescriptor_555bd8c177793206) }
 
 var fileDescriptor_555bd8c177793206 = []byte{
-	// 126 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x49, 0xce, 0xcf, 0xcd,
-	0xcd, 0xcf, 0xd3, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0xce, 0x4d, 0x4d, 0xce, 0x48, 0xcd,
-	0xc9, 0x4c, 0xd4, 0x2b, 0x33, 0x50, 0x72, 0xe6, 0xe2, 0x0d, 0x49, 0x4c, 0xca, 0x49, 0xf5, 0xc9,
-	0x4f, 0x4e, 0x2c, 0xc9, 0xcc, 0xcf, 0x13, 0x92, 0xe1, 0xe2, 0xcc, 0x4b, 0xcc, 0x4d, 0x2d, 0x2e,
-	0x48, 0x4c, 0x4e, 0x95, 0x60, 0x54, 0x60, 0xd4, 0xe0, 0x0c, 0x42, 0x08, 0x08, 0x89, 0x70, 0xb1,
-	0x96, 0x80, 0x94, 0x4b, 0x30, 0x81, 0x65, 0x20, 0x1c, 0x27, 0xe1, 0x28, 0x41, 0x3d, 0x7d, 0xb0,
-	0xe1, 0xba, 0xe9, 0xf9, 0x39, 0x89, 0x79, 0xe9, 0xfa, 0x65, 0x06, 0x49, 0x6c, 0x60, 0x01, 0x63,
-	0x40, 0x00, 0x00, 0x00, 0xff, 0xff, 0x6e, 0x8c, 0x48, 0x44, 0x7d, 0x00, 0x00, 0x00,
+	// 557 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x54, 0x4d, 0x6f, 0xd3, 0x40,
+	0x10, 0x55, 0xe2, 0x24, 0x24, 0x53, 0x40, 0xed, 0x42, 0x8b, 0x0f, 0x15, 0x54, 0xa6, 0x87, 0x5c,
+	0x70, 0xab, 0xa2, 0x4a, 0x08, 0xa4, 0x4a, 0x50, 0x09, 0x71, 0x40, 0x02, 0x6d, 0x82, 0xf8, 0x38,
+	0x20, 0x6d, 0xed, 0x89, 0xb3, 0xd2, 0x7a, 0x37, 0xb2, 0xd7, 0xad, 0xe0, 0x8f, 0x70, 0xe1, 0xc7,
+	0xa2, 0x1d, 0xaf, 0x53, 0x4c, 0x8c, 0xda, 0xdb, 0xbc, 0xf5, 0xce, 0x7b, 0xf3, 0x66, 0x76, 0x0c,
+	0x77, 0x13, 0x93, 0xe7, 0x46, 0xc7, 0xab, 0xc2, 0x58, 0xc3, 0xb6, 0x72, 0x4c, 0x96, 0xa8, 0xa4,
+	0x88, 0x2f, 0x8f, 0xa3, 0x73, 0xb8, 0x37, 0x17, 0x17, 0x0a, 0xdf, 0x9b, 0x44, 0x58, 0x69, 0x34,
+	0xdb, 0x87, 0x89, 0x16, 0x39, 0x96, 0x2b, 0x91, 0x60, 0xd8, 0x3b, 0xe8, 0x4d, 0x27, 0xfc, 0xfa,
+	0x80, 0x3d, 0x84, 0xa1, 0x75, 0xd7, 0xc3, 0x3e, 0x7d, 0xa9, 0x41, 0xa4, 0x81, 0xcd, 0x94, 0x4c,
+	0xf0, 0xdc, 0xe8, 0x85, 0xcc, 0xaa, 0xa2, 0x66, 0x62, 0x30, 0x28, 0x95, 0xb1, 0x44, 0x32, 0xe4,
+	0x14, 0xb3, 0x10, 0xee, 0x94, 0x98, 0xe5, 0xa8, 0x2d, 0x31, 0x0c, 0x79, 0x03, 0x1d, 0x73, 0xe9,
+	0x38, 0xc2, 0x80, 0xce, 0x6b, 0xe0, 0x4e, 0x13, 0x91, 0x2c, 0x31, 0x1c, 0x1c, 0xf4, 0xa6, 0x63,
+	0x5e, 0x83, 0xe8, 0x2b, 0xec, 0xce, 0x51, 0xa7, 0xa8, 0x93, 0x1f, 0x1b, 0x92, 0xb9, 0x49, 0xb1,
+	0x91, 0x74, 0x31, 0xdb, 0x83, 0x91, 0x35, 0x57, 0xa2, 0x48, 0xbd, 0xa2, 0x47, 0x8e, 0x3a, 0x45,
+	0x65, 0x45, 0x23, 0x48, 0x20, 0x12, 0xf0, 0x68, 0xa6, 0x8c, 0xfd, 0x2c, 0x75, 0x6a, 0xae, 0xda,
+	0xe4, 0x27, 0x30, 0x58, 0x1a, 0x55, 0x93, 0x6f, 0x9d, 0x3c, 0x8e, 0xff, 0x6a, 0x63, 0xfc, 0xce,
+	0xa8, 0xb6, 0x7b, 0x4e, 0x77, 0xa9, 0x07, 0xf2, 0x27, 0x7a, 0x69, 0x8a, 0xa3, 0x4f, 0xb0, 0xb3,
+	0x71, 0xbd, 0xb3, 0x72, 0x67, 0xde, 0x54, 0xeb, 0x56, 0xd5, 0xc0, 0xf9, 0x31, 0x8b, 0x45, 0x89,
+	0xd6, 0x17, 0xee, 0x51, 0xf4, 0x1d, 0xf6, 0xeb, 0xaa, 0x3f, 0xac, 0xb0, 0x26, 0xbd, 0x59, 0xa1,
+	0xa3, 0xbc, 0xff, 0xf2, 0xbf, 0x84, 0xbd, 0xb9, 0xcc, 0xb1, 0xb4, 0x22, 0x5f, 0xb5, 0x99, 0xef,
+	0x43, 0xdf, 0x96, 0xc4, 0x1b, 0xf0, 0xbe, 0x2d, 0xd9, 0x36, 0x04, 0xa9, 0x2c, 0x88, 0x74, 0xcc,
+	0x5d, 0x18, 0x7d, 0x81, 0xbd, 0xb9, 0xc8, 0x38, 0xa6, 0x55, 0x82, 0xb7, 0xaa, 0x6a, 0x89, 0xc2,
+	0xcd, 0x2b, 0x98, 0x4e, 0x38, 0xc5, 0xae, 0xaa, 0x14, 0xad, 0x90, 0x2a, 0x0c, 0xe8, 0xd4, 0xa3,
+	0xe8, 0x77, 0x0f, 0x76, 0x67, 0xa8, 0x30, 0xb1, 0xa6, 0xb8, 0x99, 0x79, 0x1b, 0x82, 0x4a, 0xa6,
+	0xfe, 0xf1, 0xba, 0xd0, 0xd5, 0x5e, 0x69, 0x72, 0x3a, 0xe1, 0xfd, 0x4a, 0x93, 0x8e, 0xc9, 0x85,
+	0xd4, 0xf4, 0xe2, 0x9c, 0x0e, 0x21, 0x76, 0x0a, 0x81, 0x15, 0x59, 0x38, 0xa4, 0xd9, 0x3f, 0x6d,
+	0xcd, 0xbe, 0xdb, 0x19, 0x77, 0xf7, 0xa3, 0x5f, 0x01, 0x1c, 0x7e, 0x54, 0x42, 0xea, 0xba, 0xc6,
+	0xb7, 0x52, 0x59, 0x2c, 0xba, 0xfa, 0x70, 0x06, 0xe3, 0xd2, 0xdb, 0xf0, 0x0f, 0x2c, 0x6a, 0x89,
+	0x74, 0x7a, 0xe4, 0xeb, 0x1c, 0x76, 0xda, 0xac, 0x4f, 0x9f, 0x92, 0x9f, 0xb4, 0x93, 0x37, 0x96,
+	0xb3, 0xd9, 0xaf, 0xd7, 0x30, 0xb1, 0xcd, 0x50, 0xa9, 0x0b, 0x1b, 0xe6, 0x3a, 0x47, 0xce, 0xaf,
+	0xb3, 0xd8, 0x0b, 0xbf, 0xe6, 0x03, 0xca, 0x3e, 0xfc, 0x47, 0xb8, 0x73, 0x95, 0xfc, 0xcf, 0xe0,
+	0x0c, 0xc6, 0xd6, 0xaf, 0xb1, 0x6f, 0x6c, 0xdb, 0x73, 0xe7, 0x8e, 0xf3, 0x75, 0x0e, 0x7b, 0x05,
+	0xa3, 0x82, 0x5a, 0x19, 0x8e, 0x6e, 0x3f, 0x16, 0x9f, 0xf2, 0xe6, 0xc1, 0xb7, 0x9d, 0xf8, 0x88,
+	0x7e, 0x88, 0xcf, 0x32, 0xa3, 0x84, 0xce, 0x8e, 0x2e, 0x8f, 0x2f, 0x46, 0x74, 0xf0, 0xfc, 0x4f,
+	0x00, 0x00, 0x00, 0xff, 0xff, 0x3e, 0x30, 0x19, 0x61, 0x31, 0x05, 0x00, 0x00,
 }

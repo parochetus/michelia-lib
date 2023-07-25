@@ -26,10 +26,11 @@ const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type RecordRequest struct {
 	Table                *TableLocation `protobuf:"bytes,1,opt,name=table,proto3" json:"table,omitempty"`
-	Timestamp            int64          `protobuf:"varint,2,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
-	Domain               string         `protobuf:"bytes,3,opt,name=domain,proto3" json:"domain,omitempty"`
-	Uid                  string         `protobuf:"bytes,4,opt,name=uid,proto3" json:"uid,omitempty"`
-	Name                 string         `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
+	Domain               string         `protobuf:"bytes,2,opt,name=domain,proto3" json:"domain,omitempty"`
+	Uid                  string         `protobuf:"bytes,3,opt,name=uid,proto3" json:"uid,omitempty"`
+	Un                   string         `protobuf:"bytes,4,opt,name=un,proto3" json:"un,omitempty"`
+	Head                 []string       `protobuf:"bytes,5,rep,name=head,proto3" json:"head,omitempty"`
+	Detail               []string       `protobuf:"bytes,6,rep,name=detail,proto3" json:"detail,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
 	XXX_unrecognized     []byte         `json:"-"`
 	XXX_sizecache        int32          `json:"-"`
@@ -67,13 +68,6 @@ func (m *RecordRequest) GetTable() *TableLocation {
 	return nil
 }
 
-func (m *RecordRequest) GetTimestamp() int64 {
-	if m != nil {
-		return m.Timestamp
-	}
-	return 0
-}
-
 func (m *RecordRequest) GetDomain() string {
 	if m != nil {
 		return m.Domain
@@ -88,11 +82,25 @@ func (m *RecordRequest) GetUid() string {
 	return ""
 }
 
-func (m *RecordRequest) GetName() string {
+func (m *RecordRequest) GetUn() string {
 	if m != nil {
-		return m.Name
+		return m.Un
 	}
 	return ""
+}
+
+func (m *RecordRequest) GetHead() []string {
+	if m != nil {
+		return m.Head
+	}
+	return nil
+}
+
+func (m *RecordRequest) GetDetail() []string {
+	if m != nil {
+		return m.Detail
+	}
+	return nil
 }
 
 type RecordResponse struct {
@@ -142,31 +150,239 @@ func (m *RecordResponse) GetStatus() string {
 	return ""
 }
 
+type RecordId struct {
+	Table                *TableLocation `protobuf:"bytes,1,opt,name=table,proto3" json:"table,omitempty"`
+	Uid                  string         `protobuf:"bytes,2,opt,name=uid,proto3" json:"uid,omitempty"`
+	Un                   string         `protobuf:"bytes,3,opt,name=un,proto3" json:"un,omitempty"`
+	Domain               string         `protobuf:"bytes,4,opt,name=domain,proto3" json:"domain,omitempty"`
+	Head                 []string       `protobuf:"bytes,5,rep,name=head,proto3" json:"head,omitempty"`
+	Detail               []string       `protobuf:"bytes,6,rep,name=detail,proto3" json:"detail,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
+	XXX_unrecognized     []byte         `json:"-"`
+	XXX_sizecache        int32          `json:"-"`
+}
+
+func (m *RecordId) Reset()         { *m = RecordId{} }
+func (m *RecordId) String() string { return proto.CompactTextString(m) }
+func (*RecordId) ProtoMessage()    {}
+func (*RecordId) Descriptor() ([]byte, []int) {
+	return fileDescriptor_bf94fd919e302a1d, []int{2}
+}
+
+func (m *RecordId) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_RecordId.Unmarshal(m, b)
+}
+func (m *RecordId) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_RecordId.Marshal(b, m, deterministic)
+}
+func (m *RecordId) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_RecordId.Merge(m, src)
+}
+func (m *RecordId) XXX_Size() int {
+	return xxx_messageInfo_RecordId.Size(m)
+}
+func (m *RecordId) XXX_DiscardUnknown() {
+	xxx_messageInfo_RecordId.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_RecordId proto.InternalMessageInfo
+
+func (m *RecordId) GetTable() *TableLocation {
+	if m != nil {
+		return m.Table
+	}
+	return nil
+}
+
+func (m *RecordId) GetUid() string {
+	if m != nil {
+		return m.Uid
+	}
+	return ""
+}
+
+func (m *RecordId) GetUn() string {
+	if m != nil {
+		return m.Un
+	}
+	return ""
+}
+
+func (m *RecordId) GetDomain() string {
+	if m != nil {
+		return m.Domain
+	}
+	return ""
+}
+
+func (m *RecordId) GetHead() []string {
+	if m != nil {
+		return m.Head
+	}
+	return nil
+}
+
+func (m *RecordId) GetDetail() []string {
+	if m != nil {
+		return m.Detail
+	}
+	return nil
+}
+
+type RecordInfo struct {
+	Table                *TableLocation `protobuf:"bytes,1,opt,name=table,proto3" json:"table,omitempty"`
+	Content              []*RecordItem  `protobuf:"bytes,2,rep,name=content,proto3" json:"content,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
+	XXX_unrecognized     []byte         `json:"-"`
+	XXX_sizecache        int32          `json:"-"`
+}
+
+func (m *RecordInfo) Reset()         { *m = RecordInfo{} }
+func (m *RecordInfo) String() string { return proto.CompactTextString(m) }
+func (*RecordInfo) ProtoMessage()    {}
+func (*RecordInfo) Descriptor() ([]byte, []int) {
+	return fileDescriptor_bf94fd919e302a1d, []int{3}
+}
+
+func (m *RecordInfo) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_RecordInfo.Unmarshal(m, b)
+}
+func (m *RecordInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_RecordInfo.Marshal(b, m, deterministic)
+}
+func (m *RecordInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_RecordInfo.Merge(m, src)
+}
+func (m *RecordInfo) XXX_Size() int {
+	return xxx_messageInfo_RecordInfo.Size(m)
+}
+func (m *RecordInfo) XXX_DiscardUnknown() {
+	xxx_messageInfo_RecordInfo.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_RecordInfo proto.InternalMessageInfo
+
+func (m *RecordInfo) GetTable() *TableLocation {
+	if m != nil {
+		return m.Table
+	}
+	return nil
+}
+
+func (m *RecordInfo) GetContent() []*RecordItem {
+	if m != nil {
+		return m.Content
+	}
+	return nil
+}
+
+type RecordItem struct {
+	Domain               string   `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`
+	Uid                  string   `protobuf:"bytes,2,opt,name=uid,proto3" json:"uid,omitempty"`
+	Un                   string   `protobuf:"bytes,3,opt,name=un,proto3" json:"un,omitempty"`
+	Head                 []string `protobuf:"bytes,4,rep,name=head,proto3" json:"head,omitempty"`
+	Detail               []string `protobuf:"bytes,5,rep,name=detail,proto3" json:"detail,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *RecordItem) Reset()         { *m = RecordItem{} }
+func (m *RecordItem) String() string { return proto.CompactTextString(m) }
+func (*RecordItem) ProtoMessage()    {}
+func (*RecordItem) Descriptor() ([]byte, []int) {
+	return fileDescriptor_bf94fd919e302a1d, []int{4}
+}
+
+func (m *RecordItem) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_RecordItem.Unmarshal(m, b)
+}
+func (m *RecordItem) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_RecordItem.Marshal(b, m, deterministic)
+}
+func (m *RecordItem) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_RecordItem.Merge(m, src)
+}
+func (m *RecordItem) XXX_Size() int {
+	return xxx_messageInfo_RecordItem.Size(m)
+}
+func (m *RecordItem) XXX_DiscardUnknown() {
+	xxx_messageInfo_RecordItem.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_RecordItem proto.InternalMessageInfo
+
+func (m *RecordItem) GetDomain() string {
+	if m != nil {
+		return m.Domain
+	}
+	return ""
+}
+
+func (m *RecordItem) GetUid() string {
+	if m != nil {
+		return m.Uid
+	}
+	return ""
+}
+
+func (m *RecordItem) GetUn() string {
+	if m != nil {
+		return m.Un
+	}
+	return ""
+}
+
+func (m *RecordItem) GetHead() []string {
+	if m != nil {
+		return m.Head
+	}
+	return nil
+}
+
+func (m *RecordItem) GetDetail() []string {
+	if m != nil {
+		return m.Detail
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*RecordRequest)(nil), "mechelia.v0.RecordRequest")
 	proto.RegisterType((*RecordResponse)(nil), "mechelia.v0.RecordResponse")
+	proto.RegisterType((*RecordId)(nil), "mechelia.v0.RecordId")
+	proto.RegisterType((*RecordInfo)(nil), "mechelia.v0.RecordInfo")
+	proto.RegisterType((*RecordItem)(nil), "mechelia.v0.RecordItem")
 }
 
 func init() { proto.RegisterFile("record.proto", fileDescriptor_bf94fd919e302a1d) }
 
 var fileDescriptor_bf94fd919e302a1d = []byte{
-	// 254 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x6c, 0x50, 0xb1, 0x4e, 0xc3, 0x30,
-	0x10, 0x55, 0x48, 0x1b, 0x29, 0xd7, 0x82, 0xc0, 0x48, 0xc8, 0x0a, 0x0c, 0x51, 0xa7, 0x2c, 0xb8,
-	0x51, 0x59, 0x11, 0x12, 0x4c, 0x0c, 0x4c, 0x16, 0x13, 0x9b, 0x6b, 0x5b, 0xc5, 0x52, 0xec, 0x0b,
-	0xb1, 0xd3, 0xbf, 0xe1, 0x5f, 0x51, 0xec, 0x22, 0xa8, 0xd4, 0xed, 0xdd, 0x7b, 0xef, 0xf4, 0xee,
-	0x1d, 0x2c, 0x07, 0x2d, 0x71, 0x50, 0xac, 0x1f, 0x30, 0x20, 0x59, 0x58, 0x2d, 0x3f, 0x75, 0x67,
-	0x04, 0xdb, 0xb7, 0xd5, 0x52, 0xa2, 0xb5, 0xe8, 0x92, 0xb4, 0xfa, 0xce, 0xe0, 0x9c, 0x47, 0x2f,
-	0xd7, 0x5f, 0xa3, 0xf6, 0x81, 0xb4, 0x30, 0x0f, 0x62, 0xdb, 0x69, 0x9a, 0xd5, 0x59, 0xb3, 0xd8,
-	0x54, 0xec, 0xdf, 0x32, 0x7b, 0x9f, 0x94, 0x37, 0x94, 0x22, 0x18, 0x74, 0x3c, 0x19, 0xc9, 0x1d,
-	0x94, 0xc1, 0x58, 0xed, 0x83, 0xb0, 0x3d, 0x3d, 0xab, 0xb3, 0x26, 0xe7, 0x7f, 0x04, 0xb9, 0x81,
-	0x42, 0xa1, 0x15, 0xc6, 0xd1, 0xbc, 0xce, 0x9a, 0x92, 0x1f, 0x26, 0x72, 0x09, 0xf9, 0x68, 0x14,
-	0x9d, 0x45, 0x72, 0x82, 0x84, 0xc0, 0xcc, 0x09, 0xab, 0xe9, 0x3c, 0x52, 0x11, 0xaf, 0x1e, 0xe1,
-	0xe2, 0xf7, 0x3c, 0xdf, 0xa3, 0xf3, 0x7a, 0x72, 0x49, 0x54, 0xe9, 0xbc, 0x92, 0x47, 0x3c, 0x65,
-	0xf8, 0x20, 0xc2, 0xe8, 0x63, 0x7c, 0xc9, 0x0f, 0xd3, 0xe6, 0x15, 0x8a, 0xb4, 0x4d, 0x9e, 0x20,
-	0x7f, 0x56, 0x8a, 0x1c, 0xb7, 0x39, 0x2a, 0x5e, 0xdd, 0x9e, 0xd4, 0x52, 0xea, 0xcb, 0xf5, 0xc7,
-	0x15, 0x5b, 0xc7, 0x97, 0xdd, 0xef, 0xb0, 0x13, 0x6e, 0xb7, 0xde, 0xb7, 0xdb, 0x22, 0x12, 0x0f,
-	0x3f, 0x01, 0x00, 0x00, 0xff, 0xff, 0xf0, 0x0c, 0xaa, 0x0a, 0x6e, 0x01, 0x00, 0x00,
+	// 382 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x93, 0x4f, 0x4f, 0xbb, 0x30,
+	0x18, 0xc7, 0x03, 0x05, 0x7e, 0xbf, 0x3d, 0x9b, 0x8b, 0xd6, 0xa8, 0x04, 0x2f, 0x84, 0x13, 0x17,
+	0xd9, 0x9c, 0xf1, 0x60, 0x62, 0x8c, 0x1a, 0x13, 0x63, 0xe2, 0xc1, 0x10, 0x4f, 0xde, 0x3a, 0xda,
+	0x6d, 0x24, 0xd0, 0x6e, 0x50, 0xf6, 0x82, 0xbc, 0xf8, 0x26, 0x3d, 0x18, 0x0a, 0xcc, 0xcd, 0xe0,
+	0x12, 0x77, 0xeb, 0xf3, 0xe7, 0xdb, 0xe7, 0xfb, 0x79, 0x28, 0xd0, 0xcb, 0x58, 0x24, 0x32, 0x1a,
+	0xcc, 0x33, 0x21, 0x05, 0xee, 0xa6, 0x2c, 0x9a, 0xb1, 0x24, 0x26, 0xc1, 0x72, 0xe8, 0xf4, 0x22,
+	0x91, 0xa6, 0x82, 0x57, 0x25, 0xef, 0x43, 0x83, 0xbd, 0x50, 0xf5, 0x86, 0x6c, 0x51, 0xb0, 0x5c,
+	0xe2, 0x21, 0x98, 0x92, 0x8c, 0x13, 0x66, 0x6b, 0xae, 0xe6, 0x77, 0x47, 0x4e, 0xb0, 0x26, 0x0e,
+	0x5e, 0xcb, 0xca, 0xb3, 0x88, 0x88, 0x8c, 0x05, 0x0f, 0xab, 0x46, 0x7c, 0x0c, 0x16, 0x15, 0x29,
+	0x89, 0xb9, 0xad, 0xbb, 0x9a, 0xdf, 0x09, 0xeb, 0x08, 0xef, 0x03, 0x2a, 0x62, 0x6a, 0x23, 0x95,
+	0x2c, 0x8f, 0xb8, 0x0f, 0x7a, 0xc1, 0x6d, 0x43, 0x25, 0xf4, 0x82, 0x63, 0x0c, 0xc6, 0x8c, 0x11,
+	0x6a, 0x9b, 0x2e, 0xf2, 0x3b, 0xa1, 0x3a, 0xab, 0xdb, 0x98, 0x24, 0x71, 0x62, 0x5b, 0x2a, 0x5b,
+	0x47, 0xde, 0x35, 0xf4, 0x1b, 0xa3, 0xf9, 0x5c, 0xf0, 0x9c, 0x95, 0xea, 0x48, 0xd0, 0xca, 0x68,
+	0x27, 0x54, 0xe7, 0x52, 0x9d, 0x4b, 0x22, 0x8b, 0xbc, 0xf1, 0x52, 0x45, 0xde, 0xbb, 0x06, 0xff,
+	0x2b, 0xf9, 0x13, 0xdd, 0x01, 0xb1, 0x46, 0xd1, 0x7f, 0xa2, 0xa0, 0x15, 0xca, 0xf7, 0x12, 0x8c,
+	0x8d, 0x25, 0xfc, 0x05, 0x71, 0x01, 0x50, 0x7b, 0xe4, 0x13, 0xb1, 0x83, 0xcb, 0x73, 0xf8, 0x17,
+	0x09, 0x2e, 0x19, 0x97, 0xb6, 0xee, 0x22, 0xbf, 0x3b, 0x3a, 0xd9, 0xd0, 0xd4, 0x77, 0x4b, 0x96,
+	0x86, 0x4d, 0x9f, 0x97, 0xad, 0x46, 0x4a, 0x96, 0xae, 0x41, 0x68, 0x6d, 0x5f, 0x72, 0x0b, 0x7e,
+	0x83, 0x69, 0xb4, 0x62, 0x9a, 0xeb, 0x98, 0xa3, 0x4f, 0x0d, 0xac, 0x6a, 0x28, 0xbe, 0x01, 0x74,
+	0x47, 0x29, 0x76, 0x5a, 0x7c, 0xd6, 0xef, 0xd1, 0x39, 0x6d, 0xad, 0xd5, 0x4f, 0xe0, 0x0a, 0xd0,
+	0x03, 0x4b, 0xf0, 0x51, 0x1b, 0x27, 0xdd, 0x2e, 0xbd, 0x05, 0xf3, 0x85, 0xc8, 0x68, 0xb6, 0xfb,
+	0xf0, 0x4b, 0x40, 0x8f, 0x4c, 0xfe, 0x36, 0xbc, 0x75, 0xf7, 0x7c, 0x22, 0xee, 0x0f, 0xdf, 0x0e,
+	0x82, 0x81, 0xfa, 0xfb, 0xce, 0xa6, 0x22, 0x21, 0x7c, 0x3a, 0x58, 0x0e, 0xc7, 0x96, 0x4a, 0x5c,
+	0x7c, 0x05, 0x00, 0x00, 0xff, 0xff, 0x48, 0xc2, 0x29, 0xaa, 0xb9, 0x03, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -182,6 +398,9 @@ const _ = grpc.SupportPackageIsVersion4
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type RecordClient interface {
 	Add(ctx context.Context, in *RecordRequest, opts ...grpc.CallOption) (*RecordResponse, error)
+	Del(ctx context.Context, in *RecordId, opts ...grpc.CallOption) (*RecordResponse, error)
+	Patch(ctx context.Context, in *RecordRequest, opts ...grpc.CallOption) (*RecordResponse, error)
+	Get(ctx context.Context, in *RecordId, opts ...grpc.CallOption) (*RecordInfo, error)
 }
 
 type recordClient struct {
@@ -201,9 +420,39 @@ func (c *recordClient) Add(ctx context.Context, in *RecordRequest, opts ...grpc.
 	return out, nil
 }
 
+func (c *recordClient) Del(ctx context.Context, in *RecordId, opts ...grpc.CallOption) (*RecordResponse, error) {
+	out := new(RecordResponse)
+	err := c.cc.Invoke(ctx, "/mechelia.v0.Record/Del", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordClient) Patch(ctx context.Context, in *RecordRequest, opts ...grpc.CallOption) (*RecordResponse, error) {
+	out := new(RecordResponse)
+	err := c.cc.Invoke(ctx, "/mechelia.v0.Record/Patch", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordClient) Get(ctx context.Context, in *RecordId, opts ...grpc.CallOption) (*RecordInfo, error) {
+	out := new(RecordInfo)
+	err := c.cc.Invoke(ctx, "/mechelia.v0.Record/Get", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // RecordServer is the server API for Record service.
 type RecordServer interface {
 	Add(context.Context, *RecordRequest) (*RecordResponse, error)
+	Del(context.Context, *RecordId) (*RecordResponse, error)
+	Patch(context.Context, *RecordRequest) (*RecordResponse, error)
+	Get(context.Context, *RecordId) (*RecordInfo, error)
 }
 
 // UnimplementedRecordServer can be embedded to have forward compatible implementations.
@@ -212,6 +461,15 @@ type UnimplementedRecordServer struct {
 
 func (*UnimplementedRecordServer) Add(ctx context.Context, req *RecordRequest) (*RecordResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Add not implemented")
+}
+func (*UnimplementedRecordServer) Del(ctx context.Context, req *RecordId) (*RecordResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Del not implemented")
+}
+func (*UnimplementedRecordServer) Patch(ctx context.Context, req *RecordRequest) (*RecordResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Patch not implemented")
+}
+func (*UnimplementedRecordServer) Get(ctx context.Context, req *RecordId) (*RecordInfo, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
 
 func RegisterRecordServer(s *grpc.Server, srv RecordServer) {
@@ -236,6 +494,60 @@ func _Record_Add_Handler(srv interface{}, ctx context.Context, dec func(interfac
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Record_Del_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RecordId)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordServer).Del(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mechelia.v0.Record/Del",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordServer).Del(ctx, req.(*RecordId))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Record_Patch_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RecordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordServer).Patch(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mechelia.v0.Record/Patch",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordServer).Patch(ctx, req.(*RecordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Record_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RecordId)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordServer).Get(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mechelia.v0.Record/Get",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordServer).Get(ctx, req.(*RecordId))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Record_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "mechelia.v0.Record",
 	HandlerType: (*RecordServer)(nil),
@@ -243,6 +555,18 @@ var _Record_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Add",
 			Handler:    _Record_Add_Handler,
+		},
+		{
+			MethodName: "Del",
+			Handler:    _Record_Del_Handler,
+		},
+		{
+			MethodName: "Patch",
+			Handler:    _Record_Patch_Handler,
+		},
+		{
+			MethodName: "Get",
+			Handler:    _Record_Get_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

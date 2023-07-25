@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package mechelia.v0;
+option go_package = "./proto-golang/v0";
+
+import "common.proto";
+
+service Vector {
+    rpc match (MatchRequest) returns (MatchInfo);
+}
+
+message MatchRequest {
+    TableLocation table = 1;
+    string uid = 2;
+    PlainSelectFilterReduceConfiguration sfr = 3;
+}
+
+message MatchInfo {
+    TableLocation table = 1;
+    repeated MatchElement content = 2;
+}
+
+message MatchElement {
+    string uid = 1;
+    string un = 2;
+}

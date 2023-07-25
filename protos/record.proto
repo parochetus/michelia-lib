@@ -7,20 +7,43 @@ import "common.proto";
 
 service Record {
     rpc Add (RecordRequest) returns (RecordResponse);
+    rpc Del (RecordId) returns (RecordResponse);
+    rpc Patch (RecordRequest) returns (RecordResponse);
+    rpc Get (RecordId) returns (RecordInfo);
 }
 
 message RecordRequest {
     TableLocation table = 1;
-
-    int64 timestamp = 2;
-
-    string domain = 3;
-
-    string uid = 4;
-    string name = 5;
+    string domain = 2;
+    string uid = 3;
+    string un = 4;
+    repeated string head = 5;
+    repeated string detail = 6;
 }
 
 message RecordResponse {
     string code = 1;
     string status = 2;
+}
+
+message RecordId {
+    TableLocation table = 1;
+    string uid = 2;
+    string un = 3;
+    string domain = 4;
+    repeated string head = 5;
+    repeated string detail = 6;
+}
+
+message RecordInfo {
+    TableLocation table = 1;
+    repeated RecordItem content = 2;
+}
+
+message RecordItem {
+    string domain = 1;
+    string uid = 2;
+    string un = 3;
+    repeated string head = 4;
+    repeated string detail = 5;
 }

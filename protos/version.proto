@@ -5,6 +5,9 @@ option go_package = "./proto-golang/v0";
 
 import "common.proto";
 import "record.proto";
+import "element.proto";
+import "wise.proto";
+import "vector.proto";
 
 service VersionService {
     rpc GetVersion(GetVersionRequest) returns (GetVersionResponse);

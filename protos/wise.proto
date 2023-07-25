@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package mechelia.v0;
+option go_package = "./proto-golang/v0";
+
+import "common.proto";
+
+service Wise {
+    rpc select (SelectRequest) returns (WiseInfo);
+}
+
+message SelectRequest {
+    TableLocation table = 1;
+    PlainSelectFilterReduceConfiguration sfr = 2;
+}
+
+message WiseInfo {
+    TableLocation table = 1;
+    repeated WiseElement content = 2;
+}
+
+message WiseElement {
+    string uid = 1;
+    string un = 2;
+}

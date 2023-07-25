@@ -7,3 +7,99 @@ message TableLocation {
     string namespace = 1;
     string table = 2;
 }
+
+message SliceConfiguration {
+    int32 slot = 1;
+    int32 segment = 2;
+    int32 slice = 3;
+    bool cache = 4;
+}
+
+message TendencyConfiguration {
+    // tendency mode
+    // mode 0: strict mode
+    // mode 1: threshold mode
+    int32 mode = 1;
+
+    // toward 0: increase
+    // toward 1: keep
+    // toward 2: decrease
+    int32 toward = 2;
+
+    // treat delta/1000 as the effective threshold
+    int32 delta = 3;
+}
+
+message SlotWindowConfiguration {
+    HoleConfiguration hole = 1;
+    int32 size = 2;
+}
+
+message HoleConfiguration {
+    // hole mode
+    // mode 0: no hole
+    // mode 1: single hole available
+    // mode 2: multi-hole available
+    int32 mode = 1;
+
+    // total hole count
+    int32 count = 2;
+
+    // max continuous hole number
+    int32 offset = 3;
+}
+
+message WindowOperationConfiguration {
+    // window operation mode
+    // mode 0: sample
+    // mode 1: average
+    // mode 2: moving average
+    int32 mode = 1;
+
+    // total hole count
+    int32 size = 2;
+
+    // max continuous hole number
+    int32 offset = 3;
+}
+
+message TimestampConfiguration {
+    int64 ts = 1;
+    bool dir = 2;
+}
+
+message TagReduceConfiguration {
+    // reduce mode
+    // mode 0: must contain all
+    // mode 1: must not contain all
+    // mode 2: contain any
+    int32 mode = 1;
+
+    repeated string head = 2;
+    repeated string detail = 3;
+}
+
+message SelectorConfiguration {
+    // selector mode
+    // mode 0: *
+    // mode 1: uid
+    // mode 2: un
+    // mode 3: domain
+    // mode 4: tag
+    int32 mode = 1;
+
+    string uid = 2;
+    string un = 3;
+    string domain = 4;
+    
+    TagReduceConfiguration tag = 5;
+}
+
+message PlainSelectFilterReduceConfiguration {
+    SelectorConfiguration selector = 1;
+    SliceConfiguration slice = 2;
+    TimestampConfiguration timestamp = 3;
+    SlotWindowConfiguration slot = 4;
+    TendencyConfiguration tendency = 5;
+    TagReduceConfiguration reduce = 6;
+}

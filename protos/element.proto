@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package mechelia.v0;
+option go_package = "./proto-golang/v0";
+
+import "common.proto";
+
+service Element {
+    rpc Add (ElementRequest) returns (ElementResponse);
+    rpc Del (ElementId) returns (ElementResponse);
+    rpc Patch (ElementRequest) returns (ElementResponse);
+    rpc Get (ElementId) returns (ElementInfo);
+}
+
+message ElementRequest {
+    TableLocation table = 1;
+    string uid = 2;
+    int64 timestamp = 3;
+    repeated float data = 4;
+    repeated string head = 5;
+    repeated string detail = 6;
+}
+
+message ElementId {
+    TableLocation table = 1;
+    string uid = 2;
+    int64 timestamp = 3;
+    repeated string head = 4;
+    repeated string detail = 5;
+}
+
+message ElementResponse {
+    string code = 1;
+    string status = 2;
+}
+
+message ElementInfo {
+    TableLocation table = 1;
+    repeated ElementItem content = 2;
+}
+
+message ElementItem {
+    string uid = 2;
+    int64 timestamp = 3;
+    repeated string head = 4;
+    repeated string detail = 5;
+}
