@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package mechelia.v0;
+option go_package = "./proto-golang/v0";
+
+message TableLocation {
+    string namespace = 1;
+    string table = 2;
+}

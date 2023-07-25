@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package mechelia.v0;
+option go_package = "./proto-golang/v0";
+
+import "common.proto";
+import "record.proto";
+
+service VersionService {
+    rpc GetVersion(GetVersionRequest) returns (GetVersionResponse);
+}
+  
+message GetVersionRequest {}
+  
+message GetVersionResponse {
+    string version = 1;
+}
+  

@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package mechelia.v0;
+option go_package = "./proto-golang/v0";
+
+import "common.proto";
+
+service Record {
+    rpc Add (RecordRequest) returns (RecordResponse);
+}
+
+message RecordRequest {
+    TableLocation table = 1;
+
+    int64 timestamp = 2;
+
+    string domain = 3;
+}
+
+message RecordResponse {
+    string code = 1;
+    string status = 2;
+}
