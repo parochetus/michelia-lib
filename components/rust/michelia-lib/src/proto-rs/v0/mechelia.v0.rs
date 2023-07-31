@@ -719,10 +719,12 @@ pub struct ElementInfo {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ElementItem {
-    #[prost(string, tag = "2")]
+    #[prost(string, tag = "1")]
     pub uid: ::prost::alloc::string::String,
-    #[prost(int64, tag = "3")]
+    #[prost(int64, tag = "2")]
     pub timestamp: i64,
+    #[prost(float, repeated, tag = "3")]
+    pub data: ::prost::alloc::vec::Vec<f32>,
     #[prost(string, repeated, tag = "4")]
     pub head: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     #[prost(string, repeated, tag = "5")]
