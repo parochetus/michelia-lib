@@ -79,7 +79,7 @@ pub struct WindowOperationConfiguration {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TimestampConfiguration {
     #[prost(int64, tag = "1")]
-    pub ts: i64,
+    pub moment: i64,
     #[prost(bool, tag = "2")]
     pub dir: bool,
 }
@@ -87,9 +87,10 @@ pub struct TimestampConfiguration {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TagReduceConfiguration {
     /// reduce mode
-    /// mode 0: must contain all
-    /// mode 1: must not contain all
-    /// mode 2: contain any
+    /// mode 0: do not reduce
+    /// mode 1: must contain all
+    /// mode 2: must not contain all
+    /// mode 3: contain any
     #[prost(int32, tag = "1")]
     pub mode: i32,
     #[prost(string, repeated, tag = "2")]
@@ -102,10 +103,8 @@ pub struct TagReduceConfiguration {
 pub struct SelectorConfiguration {
     /// selector mode
     /// mode 0: *
-    /// mode 1: uid
-    /// mode 2: un
-    /// mode 3: domain
-    /// mode 4: tag
+    /// mode 1: for uid,un,domain match
+    /// mode 2: for tag reduce match
     #[prost(int32, tag = "1")]
     pub mode: i32,
     #[prost(string, tag = "2")]
